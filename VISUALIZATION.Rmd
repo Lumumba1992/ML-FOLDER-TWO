@@ -1,0 +1,110 @@
+---
+title: 'DATA VISUALIZATION: MACHINE LEARNING FOR MALARIA PREDICTION'
+author: "Lumumba Wandera Victor"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA, message = FALSE, warning = FALSE,
+                      fig.height = 6, fig.width = 7)
+```
+
+### Confirmation and setting of working directory
+Working directory in R is the default location on your computer where R reads and writes files.
+
+Setting the working directory ensures that your files are saved and loaded from the intended locations, streamlining your workflow
+
+```{r}
+setwd("~/TMMS2014_copy2")
+```
+
+### Installation and loading of necessary packages/libraries
+```{r}
+library(tidyverse)    ##for data manipulation
+library(psych)          ##for description of  data
+library(summarytools)   ##for summarizing data
+library(sjmisc)       ##for data manipulation
+```
+
+### Load Example data
+```{r}
+malaria_data <- read.csv("mockdata_cases.csv")
+mosquito_data <- read.csv("mosq_mock.csv")
+```
+
+### Characterizing the data
+Before we start visualizing our data, we need to understand the characteristics of our data. The goal is to get an idea of the data structure and to understand the relationships between variables.
+
+### Explore the structure and summary of the datasets
+```{r}
+dim(malaria_data)    
+str(malaria_data)
+```
+
+### View the First and last Few Observations
+```{r}
+head(malaria_data)
+tail(malaria_data)
+```
+
+### Summary Statistics
+```{r}
+describeBy(malaria_data)
+```
+
+We should also explore individual columns/variables
+```{r}
+#malaria_data$location          ##values for a single column (locations)
+#malaria_data$month            ##values for a single column (month)
+#malaria_data$year             ##values for a single column (year)
+unique(malaria_data$location)  ## unique values for a single column
+```
+
+```{r}
+table(malaria_data$location)   ## frequencies for a single column (location)
+```
+
+### Checking Frequecny Tables
+```{r}
+frq(malaria_data$location)
+```
+
+### Proportions and Tables
+```{r}
+prop.table(table(malaria_data$location)) # percentages for a single column
+table(malaria_data$location, malaria_data$year)  # frequencies for multiple columns
+```
+
+### check for missing values in each column, as these can affect our visualizations.
+```{r}
+sum(is.na(malaria_data))  
+```
+
+### Check Columns with Missing values in the data set
+```{r}
+library(kableExtra)
+missing_values <- colSums(is.na(malaria_data))
+kable(missing_values)
+```
+
+### Challenge 1: Explore the structure and summary of the mosquito_data dataset
+
+* What are the dimensions of the dataset?
+
+* What are the column names?
+
+* What are the column types?
+
+```{r}
+sapply(mosquito_data, class)
+```
+
+What are some key variables or relationships that we can explore?
+
+
+
+
+
+
+
